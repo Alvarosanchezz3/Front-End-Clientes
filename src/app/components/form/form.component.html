@@ -1,0 +1,63 @@
+<div class="form-container">
+    <div class="form-div">
+        <div class="title-container">
+            <div class="img-div">
+                <img src="assets/images/hombre.png" class="icono">   
+            </div>
+            
+            <h2 class="title">Crear cliente</h2>
+        </div>
+       
+        <form #clienteForm="ngForm">
+            
+            <div class="input-box">
+                <input type="text" placeholder="Nombre" [(ngModel)]="cliente.nombre" name="nombre" required minlength="3" #nombre="ngModel"/>
+            </div>
+            
+            <div class="input-box">
+                <input type="text" placeholder="Apellido" [(ngModel)]="cliente.apellido" name="apellido" required minlength="4" #apellido="ngModel"/>
+            </div>
+            
+            <div class="input-box">
+            <input type="text" placeholder="Email" [(ngModel)]="cliente.email" name="email" required email #email="ngModel"/>
+            </div>
+                   
+            <div *ngIf="clienteForm.invalid" class="error-container">
+                <ul class="error-list">
+                    <li *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                        <ul *ngFor="let error of nombre.errors | keyvalue">
+                            <li *ngIf="error.key === 'required'">* El campo "Nombre" no puede estar vacío</li>
+                            <li *ngIf="error.key === 'minlength'">* El campo nombre debe tener 4 caracteres</li>
+                        </ul>
+                    </li>
+            
+                    <li *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                        <ul *ngFor="let error of apellido.errors | keyvalue">
+                            <li *ngIf="error.key === 'required'">* El campo "Apellido" no puede estar vacío</li>
+                            <li *ngIf="error.key === 'minlength'">* El campo apellido debe tener 4 caracteres</li>
+                        </ul>
+                    </li>
+            
+                    <li *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <ul *ngFor="let error of email.errors | keyvalue">
+                            <li *ngIf="error.key === 'required'">* El campo "Email" no puede estar vacío</li>
+                            <li *ngIf="error.key === 'email'">* Formato de email incorrecto, debe tener &#64;</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            @if (!cliente.id) {
+                <button class="btn-crear-cliente" type="submit" role="button" (click)="create()" [disabled]="!clienteForm.valid">Crear cliente</button>
+                
+            } @else {
+                <button class="btn-crear-cliente" type="submit" role="button" (click)="update()" [disabled]="!clienteForm.valid">Actualizar cliente</button>
+            }
+            
+            <div class="text-info">
+                <p class="info">(Podrás editar los datos posteriormente, no obstante, elige bien la información que introduces)</p>
+            </div>                
+
+        </form>
+    </div>
+</div>

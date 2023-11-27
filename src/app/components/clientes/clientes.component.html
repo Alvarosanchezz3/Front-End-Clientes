@@ -1,0 +1,31 @@
+<div class="container1">
+    <h2 class="title">{{title}}</h2>
+
+    <table class="tabla-clientes">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>CreateAt</th>
+                <th>Editar</th>
+                <th>Eliminar</th> 
+            </tr>            
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let cliente of clientes">
+                <td>{{cliente.id}}</td>
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.apellido}}</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.createAt}}</td>
+                <td><button class="btn-editar" [routerLink]="['/form', cliente.id]">Editar</button></td>
+                <td><button class="btn-eliminar" (click)="delete(cliente)">Eliminar</button></td>
+            </tr>
+        </tbody>
+    </table>    
+
+    <a class="btn-crear-cliente" type="submit" routerLink="/form">Crear cliente</a>
+</div>
